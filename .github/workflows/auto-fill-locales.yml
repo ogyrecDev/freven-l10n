@@ -27,3 +27,4 @@ jobs:
           body: "This PR adds newly introduced keys from en-US to all locales (values copied in English). Translators: please update."
           branch: bot/l10n-autofill
           labels: l10n, needs-translation
+          token: ${{ secrets.GH_PAT }}
