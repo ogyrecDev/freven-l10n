@@ -59,5 +59,20 @@
   "ui.menu.tip.local_singleplayer": "Tip: local singleplayer uses 127.0.0.1 with a random port.",
   "ui.menu.servers.coming_soon": "Server list — coming soon",
 
-  "ui.menu.settings.not_implemented": "Not implemented yet."
+  "ui.menu.settings.not_implemented": "Not implemented yet.",
+
+  "chat.system.name": "System",
+  "chat.system.unknown": "<unknown>",
+  "chat.system.error": "[error]",
+  "chat.system.server": "[server]",
+  "chat.system.joined": "{0} joined the game",
+  "chat.system.left": "{0} left the game",
+
+  "chat.window.title": "Chat",
+  "chat.window.pin": "Pin",
+  "chat.window.unpin": "Unpin",
+  "chat.tooltip.pin": "Pin window",
+  "chat.tooltip.unpin": "Unpin window",
+
+  "chat.input.hint": "Type a message…"
 }
