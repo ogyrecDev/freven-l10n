@@ -1,0 +1,29 @@
+name: Auto-fill locales on en-US change
+on:
+  push:
+    paths:
+      - 'locales/en-US.json'
+    branches: [ main ]
+
+jobs:
+  fill:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fill missing keys
+        run: |
+          python ci/fill_missing.py --base locales/en-US.json --locale ALL --write
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "l10n: auto-fill missing keys from en-US"
+          title: "l10n: auto-fill locales with new keys"
+          body: "This PR adds newly introduced keys from en-US to all locales (values copied in English). Translators: please update."
+          branch: bot/l10n-autofill
+          labels: l10n, needs-translation
