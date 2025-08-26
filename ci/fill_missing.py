@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 import argparse, json, os, sys
 from collections import OrderedDict
+import re
 
 def load(path):
+    # preserve order of keys
     with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        return json.load(f, object_pairs_hook=OrderedDict)
 
 def save(path, obj):
-    ordered = OrderedDict(sorted(obj.items(), key=lambda kv: kv[0]))
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(ordered, f, ensure_ascii=False, indent=2)
+        json.dump(obj, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
-def placeholder_set(s):
-    import re
+def placeholder_set(s: str):
     return tuple(sorted(set(re.findall(r"\{(\d+)\}", s))))
 
 def main():
@@ -40,27 +40,40 @@ def main():
             data = load(p)
         except FileNotFoundError:
             print(f"[fill] create {p}")
-            data = {}
-        missing = [k for k in base.keys() if k not in data]
-        if not missing:
-            print(f"[fill] {os.path.basename(p)}: up to date")
-            continue
+            data = OrderedDict()
 
-        for k in missing:
-            data[k] = base[k]
+        merged = OrderedDict()
+        missing_count = 0
+
+        # align order with en-US
+        for k, en_val in base.items():
+            if k in data:
+                merged[k] = data[k]
+            else:
+                merged[k] = en_val
+                missing_count += 1
+
+        # keep extra keys from locale at the end
+        for k in data.keys():
+            if k not in base:
+                merged[k] = data[k]
 
         bad = []
-        for k, v in data.items():
-            if k in base:
+        for k, v in merged.items():
+            if k in base and isinstance(v, str) and isinstance(base[k], str):
                 if placeholder_set(v) != placeholder_set(base[k]):
                     bad.append(k)
         if bad:
             print(f"[warn] {os.path.basename(p)}: placeholder mismatch in {len(bad)} keys (e.g. {bad[:3]})")
 
-        print(f"[fill] {os.path.basename(p)}: +{len(missing)} keys")
+        if missing_count == 0 and list(merged.keys()) == list(data.keys()):
+            print(f"[fill] {os.path.basename(p)}: up to date")
+            continue
+
+        print(f"[fill] {os.path.basename(p)}: +{missing_count} keys; re-ordered to match en-US")
         changed_any = True
         if args.write:
-            save(p, data)
+            save(p, merged)
 
     if not changed_any:
         print("[fill] nothing to do")
