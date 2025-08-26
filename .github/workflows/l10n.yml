@@ -1,0 +1,47 @@
+name: l10n-validate-and-pack
+
+on:
+  pull_request:
+    paths:
+      - "locales/*.json"
+      - "ci/**"
+      - ".github/workflows/l10n.yml"
+  push:
+    branches: [ main ]
+    paths:
+      - "locales/*.json"
+      - "ci/**"
+      - ".github/workflows/l10n.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate JSON & placeholders
+        run: python ci/validate.py
+
+  pack:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build language pack
+        run: |
+          mkdir -p dist
+          cp -v locales/*.json dist/
+          # Optional: generate a simple index
+          python - << 'PY'
+import json, os
+files = [f for f in os.listdir("dist") if f.endswith(".json")]
+with open("dist/index.json", "w", encoding="utf-8") as fp:
+    json.dump({"locales": sorted(files)}, fp, ensure_ascii=False, indent=2)
+PY
+          (cd dist && zip -r languages.zip .)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: languages
+          path: dist/languages.zip
