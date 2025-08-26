@@ -20,5 +20,44 @@
   "transport.broken_pipe": "The connection was unexpectedly broken.",
   "transport.protocol_decode": "Protocol error while communicating with the server.",
   "transport.message_too_large": "Received an oversized network message.",
-  "transport.generic": "Disconnected from the server."
+  "transport.generic": "Disconnected from the server.",
+
+  "ui.overlay.connecting.title": "Connecting",
+  "ui.overlay.connecting.body": "Connecting to server…",
+  "ui.overlay.joining.title": "Joining world",
+  "ui.overlay.joining.body": "Joining world…",
+  "ui.overlay.loading.title": "Loading world",
+  "ui.overlay.loading.body": "Loading world…",
+  "ui.overlay.loading.detail": "Preparing world…",
+  "ui.overlay.error.title": "Disconnected",
+
+  "action.cancel": "Cancel",
+  "action.back": "Back",
+  "action.back_to_main": "Back to Main Menu",
+  "action.back_to_servers": "Back to Server List",
+  "action.back_to_settings": "Back to Settings",
+
+  "ui.menu.header.title": "F R E V E N",
+  "ui.menu.header.subtitle": "Create • Explore • Survive",
+  "ui.menu.footer.discord": "Join our Discord",
+
+  "ui.menu.section.player": "Player",
+  "ui.menu.section.game": "Game",
+  "ui.menu.section.multiplayer": "Multiplayer",
+  "ui.menu.section.settings": "Settings",
+
+  "ui.menu.label.nickname": "Nickname:",
+  "ui.menu.label.address": "Address:",
+
+  "ui.menu.btn.singleplayer": "Singleplayer",
+  "ui.menu.btn.multiplayer": "Multiplayer",
+  "ui.menu.btn.settings": "Settings",
+  "ui.menu.btn.connect": "Connect",
+  "ui.menu.btn.quit": "Quit Game",
+
+  "ui.menu.err.nickname_empty": "Nickname can't be empty",
+  "ui.menu.tip.local_singleplayer": "Tip: local singleplayer uses 127.0.0.1 with a random port.",
+  "ui.menu.servers.coming_soon": "Server list — coming soon",
+
+  "ui.menu.settings.not_implemented": "Not implemented yet."
 }
