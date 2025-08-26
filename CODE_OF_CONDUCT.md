@@ -44,7 +44,7 @@ We agree to restrict the following behaviors in our community. Instances, threat
 If you experience or witness unacceptable behavior, please report it promptly.  
 Reports can be sent to:
 
-**Maintainer:** [@ogyrec](https://github.com/ogyrec)  
+**Maintainer:** [@ogyrec](https://github.com/ogyrec-o)  
 📧 **freven@proton.me**
 
 Community moderators take reports of violations seriously and will make every effort to respond in a timely manner. They will investigate all reports, reviewing messages, logs, and recordings, or interviewing witnesses and other participants. Moderators will keep investigation and enforcement actions as transparent as possible while prioritizing safety and confidentiality.  
