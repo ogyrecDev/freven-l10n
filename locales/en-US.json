@@ -9,6 +9,7 @@
   "multiplayer.disconnect.bad_first_packet": "Protocol error: invalid first packet.",
   "multiplayer.disconnect.handshake_decode_failed": "Protocol error: failed to decode handshake.",
   "multiplayer.disconnect.unexpected_first_packet": "Protocol error: unexpected first packet (id {0}).",
+  "multiplayer.disconnect.server_content_misconfigured": "Server content manifest is missing or invalid.",
 
   "transport.timeout": "Connection timed out. Please check your internet connection or the server status.",
   "transport.server_closed": "The server has closed the connection.",
